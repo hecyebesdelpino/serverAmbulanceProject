@@ -5,7 +5,6 @@
  */
 package Server;
 
-import Client.MedicalInfoController;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.URL;

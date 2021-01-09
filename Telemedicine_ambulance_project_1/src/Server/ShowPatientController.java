@@ -5,7 +5,6 @@
  */
 package Server;
 
-import Client.SaveWithoutECGController;
 import Patient.Patient;
 import java.io.IOException;
 import java.net.URL;
