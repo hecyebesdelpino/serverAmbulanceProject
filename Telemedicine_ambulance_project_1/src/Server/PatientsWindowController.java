@@ -86,23 +86,6 @@ public class PatientsWindowController implements Initializable {
         secondStage.setScene(secondScene);
             
         secondStage.show();
-        /*
-        
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("ShowPatient_1.fxml"));
-        Parent tableViewParent = loader.load();
-        
-        Scene tableViewScene = new Scene(tableViewParent);
-        
-        //access the controller and call a method
-        ShowPatientController_1 controller = loader.getController();
-        controller.initData(tableView.getSelectionModel().getSelectedItem());
-        
-        //This line gets the Stage information
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(tableViewScene);
-        window.show();*/
     }
     
     public void userClickedOnTable()
@@ -111,69 +94,19 @@ public class PatientsWindowController implements Initializable {
     }
     
     public void fillPatients() {
-        patients_=FXCollections.observableArrayList(server.patients);
+        patients_=FXCollections.observableArrayList(server.getPatients());
         tableView.setItems(patients_);
-        
-        /*
-        try
-        {
-            FileOutputStream fos = new FileOutputStream("patients.txt");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(server.patients);
-            oos.close();
-            fos.close();
-        } 
-        catch (IOException ioe) 
-        {
-            ioe.printStackTrace();
-        }*/
-    }
-    
-    public void fillPatientsInitially() throws ClassNotFoundException {
-        /*
-        try{
-            File file = new File("patients.txt");
-            ArrayList<Patient> namesList = new ArrayList<Patient>();
-            // if file doesnt exists, then create it
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            if (file.length() != 0){
-            
-                FileInputStream fis = new FileInputStream("patients.txt");
-                
-                ObjectInputStream ois = new ObjectInputStream(fis);
- 
-                namesList = (ArrayList) ois.readObject();
- 
-                ois.close();
-                fis.close();
-            }
-            server.patients=namesList;
-            patients_=FXCollections.observableArrayList(server.patients);
-            tableView.setItems(patients_);
-       
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(PatientsWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(PatientsWindowController.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
     }
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {  
-// TODO
          //set up the columns in the table
         patientName.setCellValueFactory(new PropertyValueFactory<Patient, String>("name"));
         patientID.setCellValueFactory(new PropertyValueFactory<Patient, String>("id"));
         ambulance.setCellValueFactory(new PropertyValueFactory<Patient, Ambulance>("ambulance"));
         
         this.detailedPersonViewButton.setDisable(true);
-        
-        //Disable the detailed person view button until a row is selected
-        //fillPatientsInitially();
-        
         
     }  
     

@@ -45,7 +45,6 @@ public class NewPasswordWindowController implements Initializable {
             server.setPassword(newPass.getText());
             
             Stage stage = (Stage) button.getScene().getWindow();
-            // do what you have to do
             stage.close();
         }
     }
@@ -54,7 +53,6 @@ public class NewPasswordWindowController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         label.setText("");
     }    
     

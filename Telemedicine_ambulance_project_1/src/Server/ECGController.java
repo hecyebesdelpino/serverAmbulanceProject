@@ -40,7 +40,6 @@ import javafx.stage.Stage;
  */
 public class ECGController implements Initializable {
 
-    //Frame frame = new Frame();
     @FXML
     private NumberAxis y;
     @FXML
@@ -48,16 +47,14 @@ public class ECGController implements Initializable {
     @FXML
     private LineChart<?, ?> ecgGraphics;
     
-    ArrayList<Integer> ecgValues = new ArrayList<Integer>();
-   // XYChart.Series series = new XYChart.Series();
-    Patient patient;
-    XYChart.Series series;
+    private ArrayList<Integer> ecgValues = new ArrayList<Integer>();
+    private Patient patient;
+    private XYChart.Series series;
 
    
     public void initData(Patient patient){
         this.patient =patient;
         
-        //ecgValues = BitalinoDemo.ecgValues;
         ecgValues = patient.getRecordedECG();
         if(!ecgValues.isEmpty()){
             for (int i = 0; i < ecgValues.size() ; i++) {

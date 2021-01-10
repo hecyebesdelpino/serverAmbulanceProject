@@ -24,8 +24,8 @@ import javafx.stage.Stage;
  */
 public class ShowConnectionController implements Initializable {
 
-    ClientThread client;
-    Patient patient = new Patient();
+    private ClientThread client;
+    private Patient patient = new Patient();
 
     @FXML
     private Label addressLabel;
@@ -151,7 +151,6 @@ public class ShowConnectionController implements Initializable {
         controller.initData(patient);
             
         Stage secondStage = new Stage();
-        secondStage.setTitle("ECG");
         secondStage.setScene(secondScene);
 
         secondStage.show();

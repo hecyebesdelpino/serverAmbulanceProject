@@ -27,9 +27,7 @@ import javafx.stage.Stage;
  */
 public class WarningWindowController implements Initializable {
     private Server_two server;
-    /**
-     * Initializes the controller class.
-     */
+    
     public void initData(){
         
     }
@@ -43,7 +41,6 @@ public class WarningWindowController implements Initializable {
                 Logger.getLogger(WarningWindowController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        StackPane secondaryLayout = new StackPane();
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("PasswordWindow.fxml"));
@@ -58,6 +55,9 @@ public class WarningWindowController implements Initializable {
         secondStage.show();
     }
     
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

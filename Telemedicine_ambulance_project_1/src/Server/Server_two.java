@@ -7,7 +7,11 @@ package Server;
 
 import Server.ClientThread;
 import Patient.Patient;
+import Patient.Users;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -23,20 +27,18 @@ public class Server_two implements Runnable {
     private ServerOnWindowController window;
     private int portNumber;
     private ServerSocket socket;
-    public ArrayList<Patient> patients;
+    private ArrayList<Patient> patients;
+    private ArrayList<Users> users;
     private ArrayList<Socket> clients;
     private ArrayList<ClientThread> clientThreads;
-    public ObservableList<String> serverLog;
-    public ObservableList<String> clientNames;
 
     public Server_two(int portNumber, ServerOnWindowController window, String password) throws IOException {
         this.window=window;
         this.portNumber = portNumber;
         this.password=password;
-        serverLog = FXCollections.observableArrayList();
-        clientNames = FXCollections.observableArrayList();
         patients = new ArrayList<Patient>();
         clients = new ArrayList<Socket>();
+        users= new ArrayList<Users>();
         clientThreads = new ArrayList<ClientThread>();
         socket = new ServerSocket(portNumber);
 
@@ -54,9 +56,14 @@ public class Server_two implements Runnable {
         return window;
     }
 
-    public  ArrayList<Socket> getClients(){
+    public ArrayList<Socket> getClients(){
         return clients;
     }
+    
+    public ArrayList<Users> getUsers(){
+        return users;
+    }
+    
     public  ArrayList<ClientThread> getClientThreads(){
         return clientThreads;
     }
@@ -71,7 +78,65 @@ public class Server_two implements Runnable {
     public void setPatients(ArrayList<Patient> patients) {
         this.patients = patients;
     }
+    
+    public void setUsers(ArrayList<Users> u) {
+        this.users = u;
+    }
 
+    public void deleteUser(Users user) throws IOException{
+        this.users.remove(user);
+        
+        ObjectOutputStream output = null;
+             
+        output = new ObjectOutputStream(new FileOutputStream("./Files/users.txt"));
+             
+        for (Users u : users) {
+            output.writeObject(u);
+        }
+             
+        output.close();
+        
+    }
+    
+    public void addPatient(Patient patient) throws IOException{
+        
+        int size = patients.size();
+            for (int i = 0; i < size; i++) {
+                if (patient.getId().equalsIgnoreCase(patients.get(i).getId())) {
+                    patients.remove(i);
+                    break;
+                }
+            }
+        this.patients.add(patient);
+        
+        ObjectOutputStream output = null;
+
+        output = new ObjectOutputStream(new FileOutputStream("./Files/serverPatients.txt"));
+          
+        for (Patient p : patients) {
+            output.writeObject(p);
+        }
+             
+        output.close();
+        
+    }
+    
+    
+    public void addUser(Users user) throws IOException{
+        
+        this.users.add(user);
+        
+        ObjectOutputStream output = null;
+             
+        output = new ObjectOutputStream(new FileOutputStream("./Files/users.txt"));
+             
+        for (Users u : users) {
+            output.writeObject(u);
+        }
+             
+        output.close();
+        
+    }
 
 
     public void run() {

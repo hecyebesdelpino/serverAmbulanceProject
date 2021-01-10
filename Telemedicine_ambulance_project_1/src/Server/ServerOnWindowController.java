@@ -75,64 +75,40 @@ public class ServerOnWindowController implements Initializable {
     }
     
     public void close() {
-        
-        //if(server.getClients().isEmpty()){
             
-            StackPane secondaryLayout = new StackPane();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("CloseWindow.fxml"));
+        Parent parentLoad=null;
+        try {
+            parentLoad = loader.load();
+        } catch (IOException ex) {
+            Logger.getLogger(ServerOnWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("CloseWindow.fxml"));
-            Parent passwordWindow=null;
-            try {
-                passwordWindow = loader.load();
-            } catch (IOException ex) {
-                Logger.getLogger(ServerOnWindowController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        Scene secondScene = new Scene(parentLoad);
 
-            Scene secondScene = new Scene(passwordWindow);
-            
-            CloseWindowController controller= loader.getController();
-            controller.initData(server, parent, window);
-            
-            Stage secondStage = new Stage();
-            secondStage.setTitle("Close");
-            secondStage.setScene(secondScene);
-            
-            secondStage.show();
+        CloseWindowController controller= loader.getController();
+        controller.initData(server, parent, window);
 
-            
-            
-        /*}else{
-        
-            StackPane secondaryLayout2 = new StackPane();
+        Stage secondStage = new Stage();
+        secondStage.setScene(secondScene);
 
-            FXMLLoader loader2 = new FXMLLoader();
-            loader2.setLocation(getClass().getResource("ErrorWindow.fxml"));
-            Parent tableViewParent = loader2.load();
+        secondStage.show();
 
-            Scene secondScene = new Scene(tableViewParent);
-
-            Stage secondStage = new Stage();
-            secondStage.setTitle("Error");
-            secondStage.setScene(secondScene);
-
-            secondStage.show();
-        }*/
     }
     
     public void changePassword(ActionEvent event) throws IOException{
         
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("NewPasswordWindow.fxml"));
-        Parent passwordWindow = loader.load();
+        Parent parentLoad = loader.load();
 
-        Scene secondScene = new Scene(passwordWindow);
+        Scene secondScene = new Scene(parentLoad);
 
         NewPasswordWindowController controller= loader.getController();
         controller.initData(server);
 
         Stage secondStage = new Stage();
-        secondStage.setTitle("New Password");
         secondStage.setScene(secondScene);
 
         secondStage.show();
@@ -142,15 +118,31 @@ public class ServerOnWindowController implements Initializable {
         
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("PatientsWindow.fxml"));
-        Parent ServerPatientsWindow = loader.load();
+        Parent parentLoad = loader.load();
 
-        Scene secondScene = new Scene(ServerPatientsWindow);
+        Scene secondScene = new Scene(parentLoad);
 
         PatientsWindowController controller= loader.getController();
         controller.initData(server);
 
         Stage secondStage = new Stage();
-        secondStage.setTitle("Patients");
+        secondStage.setScene(secondScene);
+
+        secondStage.show();
+    }
+    
+    public void showUsers(ActionEvent event) throws IOException{
+        
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("UsersWindow.fxml"));
+        Parent parentLoad = loader.load();
+
+        Scene secondScene = new Scene(parentLoad);
+
+        UsersWindowController controller= loader.getController();
+        controller.initData(server);
+
+        Stage secondStage = new Stage();
         secondStage.setScene(secondScene);
 
         secondStage.show();
@@ -160,15 +152,14 @@ public class ServerOnWindowController implements Initializable {
         
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("ConnectionsWindow.fxml"));
-        Parent ServerPatientsWindow = loader.load();
+        Parent parentLoad = loader.load();
 
-        Scene secondScene = new Scene(ServerPatientsWindow);
+        Scene secondScene = new Scene(parentLoad);
 
         ConnectionsWindowController controller= loader.getController();
         controller.initData(server);
 
         Stage secondStage = new Stage();
-        secondStage.setTitle("Connections");
         secondStage.setScene(secondScene);
 
         secondStage.show();

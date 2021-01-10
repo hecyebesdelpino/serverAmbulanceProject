@@ -52,18 +52,15 @@ public class CloseWindowController implements Initializable {
             server.close();
            
             Stage stage = (Stage) button.getScene().getWindow();
-            // do what you have to do
             stage.close();
             
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("ServerWindow.fxml"));
-            Parent serverInitialWindow = loader.load();
+            Parent parentLoad = loader.load();
         
-            Scene MedicalInfoScene = new Scene(serverInitialWindow);
-        
-            //This line gets the Stage information
-            
-            parent.setScene(MedicalInfoScene);
+            Scene scene = new Scene(parentLoad);
+                    
+            parent.setScene(scene);
             prevWindow.close();
             parent.show();
             
@@ -77,7 +74,6 @@ public class CloseWindowController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         labelPassword.setText("");
     }    
     

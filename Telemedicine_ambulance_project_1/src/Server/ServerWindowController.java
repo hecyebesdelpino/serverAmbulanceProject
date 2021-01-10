@@ -6,6 +6,7 @@
 package Server;
 
 import Patient.Patient;
+import Patient.Users;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,13 +48,10 @@ public class ServerWindowController implements Initializable {
     @FXML
     private TableColumn<Patient, Date> date;
 
-    @FXML
-    private TextField password;
-    @FXML
-    private TextField passwordRepeat;
+    @FXML private TextField password;
+    @FXML private TextField passwordRepeat;
 
-    @FXML
-    private Label label;
+    @FXML private Label label;
 
     public Server_two server = null;
 
@@ -65,7 +63,6 @@ public class ServerWindowController implements Initializable {
 
         Scene scene = new Scene(parent);
 
-        //access the controller and call a method
         ServerOnWindowController controller = loader.getController();
 
         if (!password.getText().equals(passwordRepeat.getText())) {
@@ -78,7 +75,6 @@ public class ServerWindowController implements Initializable {
             File file = new File("./Files/serverPatients.txt");
             ArrayList<Patient> objectsList = new ArrayList<>();
 
-            // if file doesnt exists, then create it
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -94,30 +90,49 @@ public class ServerWindowController implements Initializable {
                     }
                 }
             }
-
+            
             System.out.println(objectsList);
             server.setPatients(objectsList);
+            
+            ObjectInputStream input2 = null;
+            File fileUsers = new File("./Files/users.txt");
+            ArrayList<Users> usersList = new ArrayList<>();
+
+            if (!fileUsers.exists()) {
+                fileUsers.createNewFile();
+            }
+            if (fileUsers.length() != 0) {
+                input2 = new ObjectInputStream(new FileInputStream("./Files/users.txt"));
+
+                while (true) {
+                    try {
+                        Object obj = input2.readObject();
+                        usersList.add((Users) obj);
+                        
+                    } catch (EOFException exc) {
+                        break;
+                    }
+                }
+            }
+            
+            server.setUsers(usersList);
+            System.out.println(usersList);
+            
 
             System.out.println("connected");
 
             Thread serverThread = (new Thread(server));
             serverThread.start();
-            //threads.add(serverThread);
-
-            //This line gets the Stage information
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
             Stage secondStage = new Stage();
-            secondStage.setTitle("New Password");
             secondStage.setScene(scene);
 
             controller.initData(server, window, secondStage);
 
             secondStage.show();
             window.close();
-
         }
-
     }
 
     /**

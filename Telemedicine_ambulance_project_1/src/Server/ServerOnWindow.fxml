@@ -13,10 +13,10 @@
 <AnchorPane id="AnchorPane" prefHeight="340.0" prefWidth="489.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Server.ServerOnWindowController">
     <children>
       <Button layoutX="29.0" layoutY="290.0" mnemonicParsing="false" onAction="#close" prefHeight="27.0" prefWidth="118.0" text="OFF" textFill="#f84242" />
-      <Button layoutX="29.0" layoutY="123.0" mnemonicParsing="false" onAction="#showPatients" prefHeight="27.0" prefWidth="118.0" text="Patients" />
+      <Button layoutX="29.0" layoutY="168.0" mnemonicParsing="false" onAction="#showPatients" prefHeight="27.0" prefWidth="118.0" text="Patients" />
       <TextArea fx:id="chatWindow" layoutX="185.0" layoutY="123.0" prefHeight="194.0" prefWidth="272.0" />
-      <Button layoutX="29.0" layoutY="179.0" mnemonicParsing="false" onAction="#showConnections" prefHeight="27.0" prefWidth="118.0" text="Connections" />
-      <Button layoutX="29.0" layoutY="233.0" mnemonicParsing="false" onAction="#changePassword" text="Change Password" />
+      <Button layoutX="29.0" layoutY="125.0" mnemonicParsing="false" onAction="#showConnections" prefHeight="27.0" prefWidth="118.0" text="Connections" />
+      <Button layoutX="29.0" layoutY="250.0" mnemonicParsing="false" onAction="#changePassword" text="Change Password" />
       <Pane prefHeight="71.0" prefWidth="489.0" style="-fx-background-color: grey;">
          <children>
             <Label layoutX="190.0" layoutY="17.0" text="SERVER" textFill="WHITE">
@@ -43,5 +43,6 @@
             <Label fx:id="port" prefHeight="17.0" prefWidth="56.0" GridPane.columnIndex="3" />
          </children>
       </GridPane>
+      <Button layoutX="29.0" layoutY="208.0" mnemonicParsing="false" onAction="#showUsers" prefHeight="27.0" prefWidth="118.0" text="Users" />
    </children>
 </AnchorPane>

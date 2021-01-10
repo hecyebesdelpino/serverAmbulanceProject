@@ -142,7 +142,6 @@ public class ShowPatientController implements Initializable {
         controller.initData(patient);
             
         Stage secondStage = new Stage();
-        secondStage.setTitle("ECG");
         secondStage.setScene(secondScene);
 
         secondStage.show();

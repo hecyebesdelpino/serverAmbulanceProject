@@ -41,7 +41,7 @@ import javafx.stage.Stage;
  */
 public class ConnectionsWindowController implements Initializable {
 
-    public ObservableList <ClientThread> connections= FXCollections.observableArrayList();
+    private ObservableList <ClientThread> connections= FXCollections.observableArrayList();
     
     @FXML private TableView <ClientThread> tableView;
     @FXML private TableColumn<ClientThread, SocketAddress> address;
@@ -51,9 +51,9 @@ public class ConnectionsWindowController implements Initializable {
     
     @FXML private Button detailedPersonViewButton;
     
-    public ArrayList<ClientThread> connectionsList= new ArrayList<ClientThread>();
+    private ArrayList<ClientThread> connectionsList= new ArrayList<ClientThread>();
     
-    public Server_two server;
+    private Server_two server;
     
     public void initData(Server_two server){
         this.server=server;
@@ -62,11 +62,8 @@ public class ConnectionsWindowController implements Initializable {
 
     }
     
-    public void changeSceneToDetailedPersonView(ActionEvent event) throws IOException
-    {
-        
-        StackPane secondaryLayout = new StackPane();
-          
+    public void changeSceneToDetailedPersonView(ActionEvent event) throws IOException {
+       
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("ShowConnection.fxml"));
         Parent tableViewParent = loader.load();
@@ -77,27 +74,9 @@ public class ConnectionsWindowController implements Initializable {
         controller.initData(tableView.getSelectionModel().getSelectedItem());
         
         Stage secondStage = new Stage();
-        secondStage.setTitle("New Stage");
         secondStage.setScene(secondScene);
             
         secondStage.show();
-        /*
-        
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("ShowPatient_1.fxml"));
-        Parent tableViewParent = loader.load();
-        
-        Scene tableViewScene = new Scene(tableViewParent);
-        
-        //access the controller and call a method
-        ShowPatientController_1 controller = loader.getController();
-        controller.initData(tableView.getSelectionModel().getSelectedItem());
-        
-        //This line gets the Stage information
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(tableViewScene);
-        window.show();*/
     }
     
     public void userClickedOnTable()
@@ -108,25 +87,10 @@ public class ConnectionsWindowController implements Initializable {
     public void fillConnections() {
         connections=FXCollections.observableArrayList(server.getClientThreads());
         tableView.setItems(connections);
-        
-        /*
-        try
-        {
-            FileOutputStream fos = new FileOutputStream("patients.txt");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(server.patients);
-            oos.close();
-            fos.close();
-        } 
-        catch (IOException ioe) 
-        {
-            ioe.printStackTrace();
-        }*/
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {  
-// TODO
          //set up the columns in the table
         address.setCellValueFactory(new PropertyValueFactory<ClientThread, SocketAddress>("address"));
         port.setCellValueFactory(new PropertyValueFactory<ClientThread, Integer>("port"));
@@ -134,10 +98,5 @@ public class ConnectionsWindowController implements Initializable {
         patientID.setCellValueFactory(new PropertyValueFactory<ClientThread, String>("clientID"));
         
         this.detailedPersonViewButton.setDisable(true);
-        
-        //Disable the detailed person view button until a row is selected
-        //fillPatientsInitially();
-        
-        
     }
 }
