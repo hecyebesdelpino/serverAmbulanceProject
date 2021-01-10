@@ -40,21 +40,20 @@ import javafx.stage.Stage;
  */
 public class UsersWindowController implements Initializable {
 
-    private ObservableList <Users> users;
+    private ObservableList <Users> users=FXCollections.observableArrayList();
     
     @FXML private TableView <Users> tableView;
     @FXML private TableColumn<Users, String> user;
     
     @FXML private Button delete;
     
-    private ArrayList<Users> usersList= new ArrayList<Users>();
+    //private ArrayList<Users> usersList= new ArrayList<Users>();
     
     private Server_two server;
     
     public void initData(Server_two server){
-        users= FXCollections.observableArrayList();
         this.server=server;
-        usersList= this.server.getUsers();
+        //usersList= this.server.getUsers();
         fillUsers();
 
     }
@@ -106,6 +105,7 @@ public class UsersWindowController implements Initializable {
     
     public void fillUsers() {
         users=FXCollections.observableArrayList(server.getUsers());
+        System.out.println(users);
         tableView.setItems(users);
     }
     

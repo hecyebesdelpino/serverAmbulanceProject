@@ -114,7 +114,7 @@ public class ServerWindowController implements Initializable {
                 }
             }
             
-            System.out.println(usersList);
+            server.setUsers(usersList);
             
 
 
