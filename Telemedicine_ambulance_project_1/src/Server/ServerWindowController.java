@@ -91,7 +91,6 @@ public class ServerWindowController implements Initializable {
                 }
             }
             
-            System.out.println(objectsList);
             server.setPatients(objectsList);
             
             ObjectInputStream input2 = null;
@@ -115,11 +114,9 @@ public class ServerWindowController implements Initializable {
                 }
             }
             
-            server.setUsers(usersList);
             System.out.println(usersList);
             
 
-            System.out.println("connected");
 
             Thread serverThread = (new Thread(server));
             serverThread.start();

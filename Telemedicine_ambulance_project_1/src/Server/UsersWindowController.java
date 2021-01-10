@@ -55,7 +55,6 @@ public class UsersWindowController implements Initializable {
         users= FXCollections.observableArrayList();
         this.server=server;
         usersList= this.server.getUsers();
-        System.out.println(usersList);
         fillUsers();
 
     }
