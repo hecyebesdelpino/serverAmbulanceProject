@@ -82,7 +82,6 @@ public class PatientsWindowController implements Initializable {
         controller.initData(tableView.getSelectionModel().getSelectedItem());
         
         Stage secondStage = new Stage();
-        secondStage.setTitle("New Stage");
         secondStage.setScene(secondScene);
             
         secondStage.show();

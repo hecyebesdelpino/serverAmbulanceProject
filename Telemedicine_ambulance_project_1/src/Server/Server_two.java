@@ -146,7 +146,6 @@ public class Server_two implements Runnable {
             try{
                 clientSocket = socket.accept();
             }catch(Exception e){
-                System.out.println("exception");
                 break;
             }
 
@@ -156,7 +155,6 @@ public class Server_two implements Runnable {
                                         clientSocket, this, window);
             Thread clientThread = new Thread(clientThreadHolderClass);
             clientThreads.add(clientThreadHolderClass);
-            System.out.println("accepted");
             clientThread.start();
         }
            
@@ -170,7 +168,6 @@ public class Server_two implements Runnable {
         for(Socket sock: clients){
             try {
                 sock.close();
-                System.out.println("close sockets");
             } catch (IOException ex) {
                 Logger.getLogger(Server_two.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -180,7 +177,6 @@ public class Server_two implements Runnable {
         
         try {
             socket.close();
-            System.out.println("close socket");
         } catch (IOException ex) {
             Logger.getLogger(Server_two.class.getName()).log(Level.SEVERE, null, ex);
         }

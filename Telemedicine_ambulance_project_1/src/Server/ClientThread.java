@@ -50,7 +50,6 @@ public class ClientThread implements Runnable {
     public void run() {
             try {
                 toClient.writeObject(baseServer.getUsers());
-                System.out.println("sent");
             } catch (IOException ex) {
                 Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -76,40 +75,8 @@ public class ClientThread implements Runnable {
 
                     window.chatWindow.appendText(patient.getAmbulance() + ":  connected \n");
                     
-                    
-                    
                     baseServer.addPatient(patient);
                     
-                    /*
-                    
-                    int size = baseServer.getPatients().size();
-                    for (int i = 0; i < size; i++) {
-                        if (clientID.equalsIgnoreCase(baseServer.getPatients().get(i).getId())) {
-                            baseServer.getPatients().remove(i);
-                            break;
-                        }
-                    }
-                    
-                    baseServer.patients.add(patient);
-
-                    ObjectOutputStream output = null;
-
-                    try {
-                        output = new ObjectOutputStream(new FileOutputStream("./Files/serverPatients.txt"));
-                    } catch (IOException ex) {
-                        Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-                    for (Patient p : baseServer.patients) {
-                        output.writeObject(p);
-                    }
-                    try {
-                        output.close();
-                    } catch (IOException ex) {
-                        Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    */
-
                     while (true) {
                         toClient.flush();
                         toClient.writeByte(1);
@@ -182,7 +149,6 @@ public class ClientThread implements Runnable {
         }
         try {
             clientSocket.close();
-            System.out.println("Closed a connecttion");
         } catch (IOException ex) {
             Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
         }

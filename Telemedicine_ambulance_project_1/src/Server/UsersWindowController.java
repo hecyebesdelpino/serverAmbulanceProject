@@ -105,7 +105,6 @@ public class UsersWindowController implements Initializable {
     
     public void fillUsers() {
         users=FXCollections.observableArrayList(server.getUsers());
-        System.out.println(users);
         tableView.setItems(users);
     }
     
