@@ -50,7 +50,7 @@ public class PatientsWindowController implements Initializable {
     public ObservableList <Patient> patients_= FXCollections.observableArrayList();
     
     @FXML private TableView <Patient> tableView;
-    @FXML private TableColumn<Patient, Ambulance> ambulance;
+    @FXML private TableColumn<Patient, Date> date;
     @FXML private TableColumn<Patient, String> patientID;
     @FXML private TableColumn<Patient, String> patientName;
     
@@ -103,7 +103,7 @@ public class PatientsWindowController implements Initializable {
          //set up the columns in the table
         patientName.setCellValueFactory(new PropertyValueFactory<Patient, String>("name"));
         patientID.setCellValueFactory(new PropertyValueFactory<Patient, String>("id"));
-        ambulance.setCellValueFactory(new PropertyValueFactory<Patient, Ambulance>("ambulance"));
+        date.setCellValueFactory(new PropertyValueFactory<Patient, Date>("date"));
         
         this.detailedPersonViewButton.setDisable(true);
         

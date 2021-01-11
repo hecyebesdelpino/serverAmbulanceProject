@@ -68,67 +68,81 @@ public class ServerWindowController implements Initializable {
         if (!password.getText().equals(passwordRepeat.getText())) {
             label.setText("Passwords don´t match");
         } else {
+            try{
+                server = new Server_two(9000, controller, password.getText());
 
-            server = new Server_two(9000, controller, password.getText());
+                ObjectInputStream input = null;
+                File file = new File("./Files/serverPatients.txt");
+                ArrayList<Patient> objectsList = new ArrayList<>();
 
-            ObjectInputStream input = null;
-            File file = new File("./Files/serverPatients.txt");
-            ArrayList<Patient> objectsList = new ArrayList<>();
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+                if (file.length() != 0) {
+                    input = new ObjectInputStream(new FileInputStream("./Files/serverPatients.txt"));
 
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            if (file.length() != 0) {
-                input = new ObjectInputStream(new FileInputStream("./Files/serverPatients.txt"));
-
-                while (true) {
-                    try {
-                        Object obj = input.readObject();
-                        objectsList.add((Patient) obj);
-                    } catch (EOFException exc) {
-                        break;
+                    while (true) {
+                        try {
+                            Object obj = input.readObject();
+                            objectsList.add((Patient) obj);
+                        } catch (EOFException exc) {
+                            break;
+                        }
                     }
                 }
-            }
-            
-            server.setPatients(objectsList);
-            
-            ObjectInputStream input2 = null;
-            File fileUsers = new File("./Files/users.txt");
-            ArrayList<Users> usersList = new ArrayList<>();
 
-            if (!fileUsers.exists()) {
-                fileUsers.createNewFile();
-            }
-            if (fileUsers.length() != 0) {
-                input2 = new ObjectInputStream(new FileInputStream("./Files/users.txt"));
+                server.setPatients(objectsList);
 
-                while (true) {
-                    try {
-                        Object obj = input2.readObject();
-                        usersList.add((Users) obj);
-                        
-                    } catch (EOFException exc) {
-                        break;
+                ObjectInputStream input2 = null;
+                File fileUsers = new File("./Files/users.txt");
+                ArrayList<Users> usersList = new ArrayList<>();
+
+                if (!fileUsers.exists()) {
+                    fileUsers.createNewFile();
+                }
+                if (fileUsers.length() != 0) {
+                    input2 = new ObjectInputStream(new FileInputStream("./Files/users.txt"));
+
+                    while (true) {
+                        try {
+                            Object obj = input2.readObject();
+                            usersList.add((Users) obj);
+
+                        } catch (EOFException exc) {
+                            break;
+                        }
                     }
                 }
+
+                server.setUsers(usersList);
+
+
+
+                Thread serverThread = (new Thread(server));
+                serverThread.start();
+                Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+                Stage secondStage = new Stage();
+                secondStage.setScene(scene);
+
+                controller.initData(server, window, secondStage);
+
+                secondStage.show();
+                window.close();
+                
+            }catch(Exception e){
+                FXMLLoader loader3 = new FXMLLoader();
+                loader3.setLocation(getClass().getResource("WarningWindow.fxml"));
+                Parent parent3 = loader3.load();
+
+                Scene secondScene = new Scene(parent3);
+
+                Stage secondStage = new Stage();
+                secondStage.setTitle("Error");
+                secondStage.setScene(secondScene);
+
+                secondStage.show();
             }
-            
-            server.setUsers(usersList);
-            
-
-
-            Thread serverThread = (new Thread(server));
-            serverThread.start();
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            Stage secondStage = new Stage();
-            secondStage.setScene(scene);
-
-            controller.initData(server, window, secondStage);
-
-            secondStage.show();
-            window.close();
         }
     }
 

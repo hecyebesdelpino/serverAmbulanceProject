@@ -12,7 +12,7 @@
    <children>
       <TableView fx:id="tableView" layoutX="54.0" layoutY="98.0" onMouseClicked="#userClickedOnTable" prefHeight="185.0" prefWidth="382.0">
         <columns>
-          <TableColumn fx:id="ambulance" prefWidth="125.0" text="Ambulance" />
+          <TableColumn fx:id="date" prefWidth="125.0" text="Date" />
           <TableColumn fx:id="patientID" minWidth="7.0" prefWidth="135.0" text="Patient ID" />
             <TableColumn fx:id="patientName" prefWidth="121.0" text="Patient Name" />
         </columns>
