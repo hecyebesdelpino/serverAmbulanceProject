@@ -60,6 +60,7 @@ public class ECGController implements Initializable {
             for (int i = 0; i < ecgValues.size() ; i++) {
                series.getData().add(new XYChart.Data(""+i,ecgValues.get(i)));  
             }
+            ecgGraphics.setCreateSymbols(false);
             ecgGraphics.getData().addAll(series);
         }
     }
