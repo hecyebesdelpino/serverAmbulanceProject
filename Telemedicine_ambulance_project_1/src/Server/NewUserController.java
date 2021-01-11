@@ -57,6 +57,7 @@ public class NewUserController implements Initializable {
 
     public void initData(UsersWindowController u) {
         this.userController = u;
+        error.setText("");
     }
 
     @FXML
