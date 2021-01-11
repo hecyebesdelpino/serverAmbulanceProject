@@ -56,7 +56,7 @@ public class ClientThread implements Runnable {
             try {
                 received = (String) fromClient.readObject();
             } catch (IOException ex) {
-                Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
+                
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -96,8 +96,12 @@ public class ClientThread implements Runnable {
 
                     }
             } catch (IOException ex) {
+                try{
                 window.chatWindow.appendText(patient.getAmbulance() + ":  disconnected \n");
                 baseServer.clientDisconnected(clientSocket, this);
+                }catch(Exception e){
+                }
+                
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
             }
